@@ -16,6 +16,10 @@ public abstract class Tripulante implements Votable , Trabajable{
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -34,7 +38,17 @@ public abstract class Tripulante implements Votable , Trabajable{
     }
 
     @Override
-    public void realizarTarea() {
+    public void realizarTarea(Tarea tarea) {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Tripulante{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", rol='" + rol + '\'' +
+                ", vivo=" + vivo +
+                '}';
     }
 }
