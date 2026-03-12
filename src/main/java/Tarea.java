@@ -17,8 +17,16 @@ public class Tarea {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void setCompletada(boolean completada) {
@@ -43,5 +51,16 @@ public class Tarea {
 
     public void setSala(Sala sala) {
         this.sala = sala;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarea{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", completada=" + completada +
+                ", tripulanteAsignado=" + tripulanteAsignado +
+                ", sala=" + sala +
+                '}';
     }
 }

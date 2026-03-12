@@ -1,3 +1,3 @@
 public interface Trabajable {
-    void realizarTarea ();
+    void realizarTarea (Tarea tarea);
 }
