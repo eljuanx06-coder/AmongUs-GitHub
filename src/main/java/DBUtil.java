@@ -12,7 +12,7 @@ public class DBUtil {
 
     // Diferencia: La conexión se guarda en el atributo en vez de en el static
     private DBUtil(){
-        final String DB_URL = "jdbc:mysql://localhost:3306/AmongUs";
+        final String DB_URL = "jdbc:mysql://localhost:3307/AmongUs";
         final String USER = "root";
         final String PASS = "";
 
