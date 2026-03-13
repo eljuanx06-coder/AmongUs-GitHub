@@ -5,11 +5,10 @@ public abstract class Tripulante implements Votable , Trabajable{
     private boolean vivo;
 
 
-    public Tripulante (int id , String nombre , String rol , boolean vivo){
-        this.id = id;
+    public Tripulante (String nombre , String rol ){
         this.nombre = nombre;
         this.rol = rol;
-        this.vivo = vivo;
+        this.vivo = true;
     }
 
     public int getId() {
