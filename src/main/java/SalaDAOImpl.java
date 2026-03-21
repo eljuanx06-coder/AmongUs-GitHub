@@ -30,7 +30,7 @@ public class SalaDAOImpl implements SalaDAO{
     @Override
     public Sala obtener(int id) {
 
-        String sql = "SELECT * FROM sala WHERE ID ?";
+        String sql = "SELECT * FROM sala WHERE ID = ?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1 , id);

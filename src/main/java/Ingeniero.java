@@ -14,10 +14,6 @@ public class Ingeniero  extends Tripulante{
             System.out.println(getNombre() + "ha reparado la sala" + sala.getNombre());
         } else {
             System.out.println("La sala" +sala.getNombre() +"no esta saboteada");
-            System.out.println("prueba");
         }
     }
-
-
-
 }
