@@ -13,6 +13,7 @@ public class Main {
         System.out.println(" ---------- AMONG US ----------\n");
         System.out.println("\n Cuantos tripulante van a jugar");
         int numJugadores = scanner.nextInt();
+        scanner.nextLine();
 
         ArrayList <String> roles = new ArrayList<>();
         roles.add("impostor");
@@ -39,7 +40,7 @@ public class Main {
                 case "impostor" :
                     nuevoTripulante = new Impostor(nombre);
                     break;
-                case "capian" :
+                case "capitan" :
                     nuevoTripulante = new Capitan(nombre);
                     break;
                 case "medico" :
@@ -71,6 +72,8 @@ public class Main {
             Tarea tarea2 = new Tarea(0, "Limpiar conductos", false, t, salas.get(1));
             nave.agregarTarea(tarea1);
             nave.agregarTarea(tarea2);
+            tareaDAO.insertar(tarea1);
+            tareaDAO.insertar(tarea2);
         }
 
         System.out.println("Todo listo . Los roles han sido asignados" );
