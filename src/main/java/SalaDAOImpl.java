@@ -1,13 +1,36 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SalaDAOImpl implements SalaDAO{
     @Override
     public void insertar(Sala sala) {
 
+        String sql = "INSERT INTO sala (nombre, saboteada) VALUES (?, ?)";
+
+
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+
+            pstmt.setString(1, sala.getNombre());
+            pstmt.setBoolean(2, sala.isSaboteada());
+
+
+            pstmt.executeUpdate();
+            System.out.println("Sala guardada en la base de datos: " + sala.getNombre());
+
+        } catch (SQLException e) {
+            System.out.println("Error al insertar la sala en la BBDD: " + e.getMessage());
+        }
     }
 
     @Override
     public Sala obtener(int id) {
+
         return null;
     }
 

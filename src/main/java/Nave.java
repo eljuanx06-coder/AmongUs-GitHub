@@ -24,7 +24,7 @@ public class Nave {
     }
 
     public void agregarTarea(Tarea tarea){
-      //  tarea.add(tarea);
+     this.tareas.add(tarea);
     }
     public void limpiarPantalla(){
 
