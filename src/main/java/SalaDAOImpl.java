@@ -87,6 +87,23 @@ public class SalaDAOImpl implements SalaDAO{
             throw new RuntimeException(e);
         }
 
+        String sql = "UPDATE sala SET nombre = ?, saboteada = ? WHERE id = ?";
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+
+            pstmt.setString(1, sala.getNombre());
+            pstmt.setBoolean(2, sala.isSaboteada());
+            pstmt.setInt(3, sala.getId());
+
+
+            pstmt.executeUpdate();
+            System.out.println(" Sala actualizada correctamente: " + sala.getNombre());
+
+        } catch (SQLException e) {
+            System.out.println(" Error al actualizar la sala: " + e.getMessage());
+        }
     }
 
     @Override
