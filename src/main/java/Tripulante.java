@@ -31,6 +31,14 @@ public abstract class Tripulante implements Votable , Trabajable{
         return vivo;
     }
 
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public void votar(Tripulante tripulante) {
 
@@ -40,6 +48,8 @@ public abstract class Tripulante implements Votable , Trabajable{
     public void realizarTarea(Tarea tarea) {
 
     }
+
+    public abstract void habilidadEspecial();
 
     @Override
     public String toString() {
