@@ -6,7 +6,7 @@ public class Capitan extends Tripulante {
 
     @Override
     public void habilidadEspecial() {
-
+        System.out.println("Eres capitan");
     }
 
     public void convocarVotacion (Nave nave){
