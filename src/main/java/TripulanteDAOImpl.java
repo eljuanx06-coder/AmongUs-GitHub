@@ -8,13 +8,23 @@ public class TripulanteDAOImpl implements TripulanteDAO {
     @Override
     public void insertar(Tripulante tripulante) {
         String sql = "INSERT INTO tripulante (nombre, rol, vivo) VALUES (?, ?, ?)";
+
+        // ¡Magia aquí! Añadimos Statement.RETURN_GENERATED_KEYS
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1 , tripulante.getNombre());
             pstmt.setString(2 , tripulante.getRol());
             pstmt.setBoolean(3 , tripulante.isVivo());
             pstmt.executeUpdate();
+
+            // Recogemos el ID nuevo y se lo guardamos al objeto de Java
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    tripulante.setId(rs.getInt(1));
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

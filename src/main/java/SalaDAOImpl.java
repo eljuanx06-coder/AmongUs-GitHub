@@ -8,18 +8,23 @@ import java.util.ArrayList;
 public class SalaDAOImpl implements SalaDAO{
     @Override
     public void insertar(Sala sala) {
-
         String sql = "INSERT INTO sala (nombre, saboteada) VALUES (?, ?)";
 
-
+        // Añadimos Statement.RETURN_GENERATED_KEYS
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, sala.getNombre());
             pstmt.setBoolean(2, sala.isSaboteada());
-
-
             pstmt.executeUpdate();
+
+            // Recogemos el ID nuevo y se lo guardamos al objeto de Java
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    sala.setId(rs.getInt(1));
+                }
+            }
+
             System.out.println("Sala guardada en la base de datos: " + sala.getNombre());
 
         } catch (SQLException e) {
