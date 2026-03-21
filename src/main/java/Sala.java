@@ -3,10 +3,9 @@ public class Sala {
     private String nombre;
     private boolean saboteada;
 
-    public Sala (int id , String nombre , boolean saboteada){
-        this.id = id ;
+    public Sala (String nombre){
         this.nombre = nombre;
-        this.saboteada = saboteada;
+        this.saboteada = false;
     }
 
     public int getId() {
