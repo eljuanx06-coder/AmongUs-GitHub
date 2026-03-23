@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nave {
-    ArrayList<Tripulante>tripulantes;
-    ArrayList<Sala>salas;
-    ArrayList<Tarea>tareas;
+    ArrayList<Tripulante> tripulantes;
+    ArrayList<Sala> salas;
+    ArrayList<Tarea> tareas;
     private Scanner scanner;
 
     public Nave(ArrayList<Tripulante> tripulantes, ArrayList<Sala> salas) {
@@ -15,7 +15,6 @@ public class Nave {
     }
 
     public ArrayList<Tripulante> getTripulantes() {
-
         return tripulantes;
     }
 
@@ -27,16 +26,16 @@ public class Nave {
         return tareas;
     }
 
-    public void agregarTarea(Tarea tarea){
-     this.tareas.add(tarea);
+    public void agregarTarea(Tarea tarea) {
+        this.tareas.add(tarea);
     }
-    public void limpiarPantalla(){
+
+    public void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-
     }
 
-    public void mostrarEstadoNave(){
+    public void mostrarEstadoNave() {
         System.out.println("\n=== ESTADO DE LA NAVE ===");
 
         System.out.print("Tripulantes vivos: ");
@@ -56,24 +55,21 @@ public class Nave {
         if (!haySabotajes) System.out.print("Ninguna");
         System.out.println();
 
-        // Contar tareas
         int completadas = 0;
         for (Tarea t : tareas) {
             if (t.isCompletada()) completadas++;
         }
         System.out.println("Tareas completadas: " + completadas + "/" + tareas.size());
         System.out.println("=========================\n");
-
-
     }
-    public  void iniciarVotacion(){
+
+    public void iniciarVotacion() {
         System.out.println("\n=== VOTACIÓN DE EMERGENCIA ===");
-        // Array para contar los votos (la posición coincide con el índice del tripulante)
         int[] votos = new int[tripulantes.size()];
 
         for (int i = 0; i < tripulantes.size(); i++) {
             Tripulante votante = tripulantes.get(i);
-            if (!votante.isVivo()) continue; // Los muertos no votan
+            if (!votante.isVivo()) continue;
 
             limpiarPantalla();
             System.out.println("¡Turno de voto de " + votante.getNombre() + "!");
@@ -97,7 +93,6 @@ public class Nave {
             }
         }
 
-        // Calcular quién tiene más votos
         int maxVotos = 0;
         int idExpulsado = -1;
         boolean empate = false;
@@ -128,15 +123,15 @@ public class Nave {
         } else {
             System.out.println("\nEmpate o falta de votos. Nadie ha sido expulsado.");
         }
-
-
     }
-    public boolean verificarVictoriaTripulantes(){        for (Tripulante t : tripulantes) {
-        if (t.getRol().equalsIgnoreCase("impostor") && !t.isVivo()) {
-            return true;
+
+    public boolean verificarVictoriaTripulantes() {
+        for (Tripulante t : tripulantes) {
+            if (t.getRol().equalsIgnoreCase("impostor") && !t.isVivo()) {
+                return true;
+            }
         }
-    }
-        // O ganan si TODAS las tareas están completadas
+
         boolean todasCompletas = true;
         for (Tarea t : tareas) {
             if (!t.isCompletada()) {
@@ -145,10 +140,9 @@ public class Nave {
             }
         }
         return todasCompletas;
-
-
     }
-    public boolean verificarVictoriaImpostor(){
+
+    public boolean verificarVictoriaImpostor() {
         int vivosNormales = 0;
         int vivosImpostores = 0;
 
@@ -162,18 +156,17 @@ public class Nave {
             }
         }
         return vivosImpostores >= vivosNormales;
-
-
     }
-    public void turno(){
+
+    public void turno() {
         for (Tripulante jugador : tripulantes) {
-            if (!jugador.isVivo()) continue; // Si está muerto, saltamos su turno
+            if (!jugador.isVivo()) continue;
 
             limpiarPantalla();
             System.out.println("¡Pasa el ordenador a " + jugador.getNombre() + "!");
             System.out.println("Pulsa Enter cuando estés listo...");
-            scanner.nextLine(); // Pausa
-            scanner.nextLine(); // Pausa
+            scanner.nextLine();
+            scanner.nextLine();
 
             System.out.println("TURNO DE " + jugador.getNombre().toUpperCase());
             System.out.println("Tu rol secreto: " + jugador.getRol().toUpperCase());
@@ -192,8 +185,6 @@ public class Nave {
             switch (opcion) {
                 case 1:
                     System.out.println("Has elegido trabajar en tus tareas.");
-                    // Aquí podrías listar las tareas del jugador y marcar una,
-                    // por simplicidad marcamos la primera que encontremos no completada
                     for (Tarea t : tareas) {
                         if (t.getTripulanteAsignado().getNombre().equals(jugador.getNombre()) && !t.isCompletada()) {
                             jugador.realizarTarea(t);
@@ -208,7 +199,6 @@ public class Nave {
                     jugador.habilidadEspecial();
                     break;
                 case 3:
-                    // Si es el capitán usa su método, si no, es un voto normal
                     if (jugador instanceof Capitan) {
                         ((Capitan) jugador).convocarVotacion(this);
                     } else {
@@ -224,11 +214,8 @@ public class Nave {
             }
 
             System.out.println("Pulsa Enter para finalizar tu turno...");
-            scanner.nextLine(); // Limpiar buffer
-            scanner.nextLine(); // Pausa real
+            scanner.nextLine();
+            scanner.nextLine();
         }
-
-
     }
-
 }
